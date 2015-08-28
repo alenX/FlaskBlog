@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap.min.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2>Login</h2>
+    <form action="" method="post">
+        <input type="text" name="username" value="{{ request.form.username }}" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <label class="checkbox" >
+            <input type="checkbox" value="Remember">Remember me
+        </label>
+        <button class="btn btn-primary" type="submit" value="Login">Login</button>
+    </form>
+</div>
+<script src="{{ url_for('static',filename='jquery-2.1.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"></script>
+</body>
+</html>
