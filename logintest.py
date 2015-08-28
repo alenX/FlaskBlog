@@ -7,8 +7,6 @@ app = Flask(__name__)
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        print request.form['username']
-        print request.form['password']
         return redirect(url_for('index', username=request.form['username']))
     else:
         return render_template('login.html')
