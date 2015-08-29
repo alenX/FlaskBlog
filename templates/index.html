@@ -1,12 +1,167 @@
 {% extends "base.html" %}
 {% block title %}Index Page{% endblock %}
 {% block head %}
-{{ super() }}
-    <style>
+    {{ super() }}
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+
+        .content {
+            padding: 10px 15px;
+        }
+
+        .panel-heading {
+            height: 50px;
+        }
     </style>
 {% endblock %}
 {% block body %}
-<div class="form-control">
-    Hello ,{{ username }}
-</div>
+    <div class="container">
+        <div class="content">
+            <h1>Hello ,{{ username }}</h1>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle active" data-toggle="dropdown">
+                        Filter By Disabled<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Filter by A</a></li>
+                        <li><a href="#">Filter by C</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Reset</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Sorted By Name<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="#">Filter by A</a></li>
+                        <li><a href="#">Filter by C</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Reset</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="pull-left">
+                <button class="btn btn-success" data-toggle="modal" data-target="#newPopUp" data-backdrop="static">新增</button>
+                <button class="btn btn-warning">禁用</button>
+                <button class="btn btn-danger">删除</button>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover">
+
+            <thead>
+            <tr>
+                <td>用户名称</td>
+                <td>邮箱</td>
+                <td>电话</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>admin</td>
+                <td>test@test.com</td>
+                <td>8888 8888</td>
+                <td>
+                    <button class="btn btn-xs btn-info">明细</button>
+                    <button class="btn btn-xs btn-error">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>test</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <button class="btn btn-xs btn-info">明细</button>
+                    <button class="btn btn-xs btn-error">删除</button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <ul class="pagination">
+                    <li class="disabled"><span>前一页</span></li>
+                    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li class="disabled"><span>...</span></li>
+                    <li><a href="#">15</a></li>
+                    <li><a href="#">16</a></li>
+                    <li><a href="#">17</a></li>
+                    <li><a href="#"><span>下一页</span></a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="modal fade" id="newPopUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myUserInfo">新增用户信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="inputUsername3" class="col-sm-2 control-label">用户名</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Username" placeholder="用户名">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="Email" placeholder="邮箱">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="Password" placeholder="密码">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputTelephone3" class="col-sm-2 control-label">电话</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Telephone" placeholder="电话">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox"><label><input type="checkbox">启用</label></div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" value="save">保存</button>
+                        <button type="button" class="btn btn-default">重置</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
