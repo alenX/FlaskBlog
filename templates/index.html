@@ -149,19 +149,23 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="checkbox"><label><input type="checkbox">启用</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" id="validate">启用</label></div>
                                 </div>
                             </div>
 
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" value="save">保存</button>
+                    <form method="post">
+                       <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" value="save" >保存</button>
                         <button type="button" class="btn btn-default">重置</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}
