@@ -1,8 +1,11 @@
-from flask import Flask, render_template, redirect, url_for
-from flask import request
+# coding: UTF-8
+from flask import Flask, render_template, redirect, url_for,jsonify
+from flask import request,session
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.wtf import Form
+from flask.ext.bootstrap import Bootstrap
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from werkzeug.security import generate_password_hash,check_password_hash
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -10,6 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TRARDOWN'] = True
 db = SQLAlchemy(app)
+bootstrap = Bootstrap(app)
 
 
 class UserAddForm(Form):
@@ -23,22 +27,27 @@ class UserAddForm(Form):
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    """
+    登陆函数页面
+
+    """
     if request.method == 'POST':
-        return redirect(url_for('index', username=request.form['username']))
+        print request.form['username']
+
+        return redirect(url_for('index', name='dd')) #返回登陆后的页面
     else:
-        return render_template('login.html')
+        return render_template('login.html')#返回登陆页面
 
 
-@app.route("/index/<username>", methods=['POST', 'GET'])
-def index(username):
-    if request.method == 'POST':
-        print 'tt'
-        form = UserAddForm()
-        print form.username.data
+@app.route("/index/<name>")
+def index(name):
+    return render_template('htmls/indexpage.html', name=name)
 
 
-    else:
-        return render_template('index.html', username=username)
+@app.route('/logout')
+def logout():
+    print '123'
+    return render_template('login.html')
 
 
 @app.route('/')
@@ -49,6 +58,21 @@ def hello_world():
 @app.route('/save')
 def save_user():
     print 'dd111'
+
+
+@app.route('/footer')
+def footer_page():
+    return render_template('htmls/footer.html')
+
+
+@app.route('/banner')
+def banner_page():
+    return render_template('htmls/banner.html')
+
+
+@app.route('/test')
+def test():
+    return render_template('login.html')
 
 
 if __name__ == '__main__':

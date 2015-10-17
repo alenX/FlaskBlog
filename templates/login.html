@@ -1,35 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Login</title>
+{% block title %}Flask登陆{% endblock %}
+{% extends "htmls/banner.html" %}
+{% block head %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript">
+        {#        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}#}
 
-
-    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap.min.css') }}">
-
-    <style type="text/css">
-        body {
-            padding-top: 50px;
-            padding-bottom: 50px;
-            background-color: #e8e8e8;
+        function login() {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            alert(username);
+            $.post({
+                url: '/login',
+                data: {username: username, password: password},
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+                }, error: function (error) {
+                    console.log(error);
+                }
+            })
         }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h2>Login</h2>
 
-    <form action="" method="post">
-        <input type="text" name="username" value="{{ request.form.username }}" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <label class="checkbox">
-            <input type="checkbox" value="Remember">Remember me
-        </label>
-        <button class="btn btn-primary" type="submit">Login</button>
-    </form>
-</div>
-<script src="{{ url_for('static',filename='jquery-2.1.1.min.js') }}"></script>
-<script src="{{ url_for('static',filename='bootstrap.min.js') }}"></script>
-</body>
-</html>
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal col-lg-6" method="POST">
+            <fieldset>
+                <legend>登陆</legend>
+                <div class="form-group ">
+                    <label class="col-sm-2">用户名</label>
+                    <input type="text" class="form-control " placeholder="请输入你的用户名" id="username">
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2">密码</label>
+                    <input type="password" class="form-control" placeholder="请输入你的密码" id="password">
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox">记住密码</label>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="btn btn-default" id="loginBtn" onclick="login()">登陆</button>
+                    <button class="btn btn-default">忘记密码</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
+{% include "htmls/footer.html" %}
